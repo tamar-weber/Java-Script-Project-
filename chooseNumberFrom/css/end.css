@@ -1,0 +1,46 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.result-container {
+    text-align: center;
+}
+
+.score-message {
+    font-size: 3em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff4081, #00e676, #ffeb3b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.button {
+    font-size: 1.5rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    background-color: #ff4081;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #f50057;
+}

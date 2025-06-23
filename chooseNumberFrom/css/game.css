@@ -1,0 +1,238 @@
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #121212; /* רקע שחור */
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    color: #ffffff; /* טקסט לבן */
+    overflow: hidden; /* כדי למנוע גלילה */
+}
+.game-container {
+    text-align: center;
+    position: relative;
+}
+.number-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 60px); /* 10 עמודות, כל עמודה 60px */
+    grid-template-rows: repeat(10, 60px); /* 10 שורות, כל שורה 60px */
+    gap: 5px; /* רווח בין תאים */
+    margin: 0 auto;
+    padding: 10px; /* ריווח פנימי */
+}
+.number {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+    user-select: none; /* מניעת בחירת טקסט */
+    position: relative;
+}
+.number.correct::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background-color: red;
+    transform: rotate(-45deg);
+    top: 50%;
+    left: 0;
+}
+.number:hover {
+    transform: scale(1.2);
+}
+.number.correct {
+    animation: pop 0.3s ease-out;
+}
+.number.wrong {
+    animation: shake 0.3s ease-in-out;
+}
+@keyframes pop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(0); }
+}
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}#target-number {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #ff4081, #00e676, #ffeb3b);
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    animation: gradient 3s ease infinite;
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#score {
+    font-size: 1.5em;
+    position: fixed; /* שונה מ-absolute ל-fixed */
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(45deg, #ff4081, #00e676, #2196f3);
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+
+#number-to-click {
+    font-size: 3em; /* גודל הטקסט */
+    margin-bottom: 20px; /* מרווח מתחת */
+    background: linear-gradient(90deg, #ff4081, #ffeb3b, #00e676, #2196f3, #f50057, #ff9800);
+    background-clip: text;
+    color: transparent;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    animation: gradient 3s ease infinite;
+    padding: 10px; /* ריווח פנימי */
+    border-radius: 10px; /* פינות מעוגלות */
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.5); /* צל */
+    display: inline-block; /* הצגה בשורה נפרדת */
+    background-size: 200% auto; /* מגדיל את אזור הרקע */
+}
+
+@keyframes gradient {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+
+#timer {
+    font-size: 1.5em;
+    margin-top: 20px;
+    position: relative;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    background-color: #1f1f1f;
+    border-radius: 50%;
+    line-height: 120px;
+    text-align: center;
+    box-shadow: 0px 0px 15px 0px #000000;
+    border: 5px solid #ff4081;
+    transition: border-color 1s linear;
+    animation: color-change 2s infinite; /* הוספת אנימציה */
+}
+
+@keyframes color-change {
+    0% { border-color: #ff4081; }
+    50% { border-color: #00e676; }
+    100% { border-color: #ff4081; }
+}
+
+#time-left {
+    position: relative;
+    z-index: 2; /* מעל הצבע המתקדם */
+    font-weight: bold;
+}
+#time-select {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 1.5em;
+    display: none; 
+}
+.button {
+    display: block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff4081;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    font-size: 1em;
+    cursor: pointer;
+} 
+#game-over-message {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    text-align: center;
+    z-index: 1000;
+    opacity: 0; /* נתחיל עם 0 כדי להסתיר */
+    transition: opacity 0.5s ease-in-out;
+}
+
+#game-over-message.show {
+    opacity: 1; /* נוודא שה-`opacity` משתנה ל-1 */
+}
+#gameOverText {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    animation: shake 1s infinite;
+}
+
+#finalScore {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+#playAgainButton {
+    font-size: 2rem;
+    padding: 0.5rem 2rem;
+    border: none;
+    background-color: #ff4081;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#playAgainButton:hover {
+    background-color: #f50057;
+}
+
+
+@keyframes shake {
+    0% { transform: translate(1px, 1px) rotate(0deg); }
+    10% { transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { transform: translate(-3px, 0px) rotate(1deg); }
+    30% { transform: translate(3px, 2px) rotate(0deg); }
+    40% { transform: translate(1px, -1px) rotate(1deg); }
+    50% { transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { transform: translate(-3px, 1px) rotate(0deg); }
+    70% { transform: translate(3px, 1px) rotate(-1deg); }
+    80% { transform: translate(-1px, -1px) rotate(1deg); }
+    90% { transform: translate(1px, 2px) rotate(0deg); }
+    100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
